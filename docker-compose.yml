@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    image: php:apache
+    container_name: my-php-app
+    ports:
+      - "80:80"
+    volumes:
+      - ./var/www/html:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    container_name: my-mysql-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: WebApp
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - ./data:/var/lib/mysql
